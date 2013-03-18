@@ -3,19 +3,12 @@ use strict;
 use warnings;
 
 my %requires = (
-                 'perl'                     => '5.008000',
-                 'Encode'                   => '0',
+                 'perl'                     => '5.010000',
                  'File::Path'               => '0',
-                 'I18N::LangTags::Detect'   => '0',
                  'IO::File'                 => '0',
-                 'Locale::Country'          => '0',
-                 'Locale::Language'         => '0',
-                 'POSIX'                    => '0',
-                 'Tk'                       => '0',
-                 'Tk::ROText'               => '0',
                );
 my %build_mods = (
-                 'Test::Inter'              => '0',
+                 'Test::Inter'              => '1.04',
                  'lib'                      => '0',
                );
 
@@ -27,7 +20,7 @@ my $class = Module::Build->subclass(
 
 my $build = $class->new(
         license            => 'perl',
-        dist_version       => '0.90',
+        dist_version       => '0.91',
         dist_author        => 'Sullivan Beck <sbeck@cpan.org>',
         module_name        => 'Locale::VersionedMessages',
         dist_abstract      => 'handle all aspects of the localization process',

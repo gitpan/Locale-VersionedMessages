@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-use Test::Inter;
+use Test::Inter 1.04;
 
 BEGIN {
    $t       = new Test::Inter 'message';

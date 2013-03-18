@@ -3,7 +3,7 @@ abstract: 'handle all aspects of the localization process'
 author:
   - 'Sullivan Beck <sbeck@cpan.org>'
 build_requires:
-  Test::Inter: 0
+  Test::Inter: 1.04
   lib: 0
 configure_requires:
   Module::Build: 0.39
@@ -17,7 +17,7 @@ name: Locale-VersionedMessages
 provides:
   Locale::VersionedMessages:
     file: lib/Locale/VersionedMessages.pm
-    version: 0.90
+    version: 0.91
   Locale::VersionedMessages::Sets::lm_gui:
     file: lib/Locale/VersionedMessages/Sets/lm_gui.pm
     version: 0
@@ -31,16 +31,9 @@ provides:
     file: lib/Locale/VersionedMessages/lm.pm
     version: 0
 requires:
-  Encode: 0
   File::Path: 0
-  I18N::LangTags::Detect: 0
   IO::File: 0
-  Locale::Country: 0
-  Locale::Language: 0
-  POSIX: 0
-  Tk: 0
-  Tk::ROText: 0
-  perl: 5.008000
+  perl: 5.010000
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.90
+version: 0.91

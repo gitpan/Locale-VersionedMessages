@@ -2,6 +2,7 @@ bin/lm_gui
 Build.PL
 HISTORY
 INSTALL
+internal/build.yaml
 internal/lm_admin
 internal/TODO
 lib/Locale/VersionedMessages.pm

@@ -17,7 +17,7 @@ our(%Messages);
 
 %Messages = (
    'button: add locale' => {
-      'vers'  => 7,
+      'vers'  => 9,
       'text'  => 'Add New Locale
 ',
    },
