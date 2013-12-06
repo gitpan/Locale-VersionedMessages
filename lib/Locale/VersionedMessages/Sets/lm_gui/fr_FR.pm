@@ -1,4 +1,5 @@
-package Locale::VersionedMessages::Sets::lm_gui::fr_FR;
+package #
+Locale::VersionedMessages::Sets::lm_gui::fr_FR;
 ####################################################
 #        *** WARNING WARNING WARNING ***
 #
@@ -257,17 +258,3 @@ caractères seulement.
 );
 
 1;
-
-=pod
-
-=head1 NAME
-
-Locale::VersionedMessages::Sets::lm_gui::fr_FR -- Localized messages
-
-=head1 DESCRIPTION
-
-This module is not intended for public use. It is used internally by
-Locale::VersionedMessages to store the lexicon for the set of messages (lm_gui)
-translated into the locale (fr_FR).
-
-=cut

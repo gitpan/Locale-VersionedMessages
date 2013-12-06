@@ -231,6 +231,10 @@ sub manage_set_create {
    chomp($submit);
    $submit          = decode('utf8',$submit);
 
+   my $cancel     = $lm->message($message_set,'button: cancel');
+   chomp($cancel);
+   $cancel        = decode('utf8',$cancel);
+
    # 1  Frame
 
    my $frame_left   = $frame->Frame()->pack( -padx   => 10,
@@ -372,20 +376,6 @@ sub manage_set_create {
    $new_msgid_ent->grid( -row => 1, -column => 2, -sticky => 'w' );
    $widgets{'manage_set:new_msgid_ent'} = $new_msgid_ent;
 
-   # R_New   Description: [entry]
-
-   my $new_desc_text    = $lm->message($message_set,'manage_set: desc');
-   chomp($new_desc_text);
-   $new_desc_text       = decode('utf8',$new_desc_text);
-
-   my $new_desc_label   = $frame_r_new_1->Label( -text => "$new_desc_text:" );
-   $new_desc_label->grid( -row => 2, -column => 1, -sticky => 'w' );
-
-   my $new_desc_ent     = $frame_r_new_1->Entry( -width      => 50,
-                                                 -background => 'white' );
-   $new_desc_ent->grid( -row => 2, -column => 2, -sticky => 'w' );
-   $widgets{'manage_set:new_desc_ent'} = $new_desc_ent;
-
    # R_New   Substitution Values: [entry]
 
    my $new_subst_text    = $lm->message($message_set,'manage_set: subst');
@@ -393,12 +383,25 @@ sub manage_set_create {
    $new_subst_text       = decode('utf8',$new_subst_text);
 
    my $new_subst_label   = $frame_r_new_1->Label( -text => "$new_subst_text:" );
-   $new_subst_label->grid( -row => 3, -column => 1, -sticky => 'w' );
+   $new_subst_label->grid( -row => 2, -column => 1, -sticky => 'w' );
 
    my $new_subst_ent     = $frame_r_new_1->Entry( -width      => 50,
                                                   -background => 'white' );
-   $new_subst_ent->grid( -row => 3, -column => 2, -sticky => 'w' );
+   $new_subst_ent->grid( -row => 2, -column => 2, -sticky => 'w' );
    $widgets{'manage_set:new_subst_ent'} = $new_subst_ent;
+
+   # R_New   Description: [entry]
+
+   my $new_desc_text    = $lm->message($message_set,'manage_set: desc');
+   chomp($new_desc_text);
+   $new_desc_text       = decode('utf8',$new_desc_text);
+
+   my $new_desc_label   = $frame_r_new_1->Label( -text => "$new_desc_text:" );
+   $new_desc_label->grid( -row => 3, -column => 1, -sticky => 'w' );
+
+   my $new_desc_ent     = text_widget('',$frame_r_new_1,3);
+   $new_desc_ent->grid( -row => 3, -column => 2, -sticky => 'w' );
+   $widgets{'manage_set:new_desc_ent'} = $new_desc_ent;
 
    # R_New   Message: [entry]
 
@@ -413,14 +416,23 @@ sub manage_set_create {
    $new_def_ent->grid( -row => 4, -column => 2, -sticky => 'w' );
    $widgets{'manage_set:new_def_ent'} = $new_def_ent;
 
-   # R_New  <Submit>
+   # R_New  <Submit> <Cancel>
 
-   $frame_r_new->Button( -text    => $submit,
-                         -command =>
-                         sub {
-                            manage_set_submit_new();
-                         }
-                       )->pack( -side => 'bottom', -pady => 10 );
+   my $frame_r_new_butt = $frame_r_new->Frame()->pack( -pady => 10 );
+
+   $frame_r_new_butt->Button( -text    => $submit,
+                              -command =>
+                              sub {
+                                 manage_set_submit_new();
+                              }
+                            )->pack( -side => 'left', -pady => 10 );
+
+   $frame_r_new_butt->Button( -text    => $cancel,
+                              -command =>
+                              sub {
+                                 manage_set_cancel_new();
+                              }
+                            )->pack( -side => 'right', -pady => 10 );
 
    ########################################
    # R_Def
@@ -456,20 +468,6 @@ sub manage_set_create {
    $def_msgid_ent->grid( -row => 1, -column => 2, -sticky => 'w' );
    $widgets{'manage_set:def_msgid_ent'} = $def_msgid_ent;
 
-   # R_Def   Description: [entry]
-
-   my $def_desc_text    = $lm->message($message_set,'manage_set: desc');
-   chomp($def_desc_text);
-   $def_desc_text       = decode('utf8',$def_desc_text);
-
-   my $def_desc_label   = $frame_r_def_1->Label( -text => "$def_desc_text:" );
-   $def_desc_label->grid( -row => 2, -column => 1, -sticky => 'w' );
-
-   my $def_desc_ent     = $frame_r_def_1->Entry( -width      => 50,
-                                                 -background => 'white' );
-   $def_desc_ent->grid( -row => 2, -column => 2, -sticky => 'w' );
-   $widgets{'manage_set:def_desc_ent'} = $def_desc_ent;
-
    # R_Def   Substitution Values: [entry]
 
    my $def_subst_text    = $lm->message($message_set,'manage_set: subst');
@@ -477,12 +475,25 @@ sub manage_set_create {
    $def_subst_text       = decode('utf8',$def_subst_text);
 
    my $def_subst_label   = $frame_r_def_1->Label( -text => "$def_subst_text:" );
-   $def_subst_label->grid( -row => 3, -column => 1, -sticky => 'w' );
+   $def_subst_label->grid( -row => 2, -column => 1, -sticky => 'w' );
 
    my $def_subst_ent     = $frame_r_def_1->Entry( -width      => 50,
                                                   -background => 'white' );
-   $def_subst_ent->grid( -row => 3, -column => 2, -sticky => 'w' );
+   $def_subst_ent->grid( -row => 2, -column => 2, -sticky => 'w' );
    $widgets{'manage_set:def_subst_ent'} = $def_subst_ent;
+
+   # R_Def   Description: [entry]
+
+   my $def_desc_text    = $lm->message($message_set,'manage_set: desc');
+   chomp($def_desc_text);
+   $def_desc_text       = decode('utf8',$def_desc_text);
+
+   my $def_desc_label   = $frame_r_def_1->Label( -text => "$def_desc_text:" );
+   $def_desc_label->grid( -row => 3, -column => 1, -sticky => 'w' );
+
+   my $def_desc_ent     = text_widget('',$frame_r_def_1,3);
+   $def_desc_ent->grid( -row => 3, -column => 2, -sticky => 'w' );
+   $widgets{'manage_set:def_desc_ent'} = $def_desc_ent;
 
    # R_Def   Message: [entry]
 
@@ -510,14 +521,23 @@ sub manage_set_create {
    my $def_lvu_chk     = $frame_r_def_1->Checkbutton( -variable => \$data{'lvu'} );
    $def_lvu_chk->grid( -row => 5, -column => 2, -sticky => 'w' );
 
-   # R_Def  <Submit>
+   # R_Def  <Submit> <Cancel>
 
-   $frame_r_def->Button( -text    => $submit,
-                         -command =>
-                         sub {
-                            manage_set_submit_def();
-                         }
-                       )->pack( -side => 'bottom', -pady => 10 );
+   my $frame_r_def_butt = $frame_r_def->Frame()->pack( -pady => 10 );
+
+   $frame_r_def_butt->Button( -text    => $submit,
+                              -command =>
+                              sub {
+                                 manage_set_submit_def();
+                              }
+                            )->pack( -side => 'left', -pady => 10 );
+
+   $frame_r_def_butt->Button( -text    => $cancel,
+                              -command =>
+                              sub {
+                                 manage_set_cancel_def();
+                              }
+                            )->pack( -side => 'right', -pady => 10 );
 
    ########################################
    # R_Edit
@@ -552,19 +572,6 @@ sub manage_set_create {
    $edit_msgid_ent->grid( -row => 1, -column => 2, -sticky => 'nw' );
    $widgets{'manage_set:edit_msgid_ent'} = $edit_msgid_ent;
 
-   # R_Edit   Description: Value
-
-   my $edit_desc_text    = $lm->message($message_set,'manage_set: desc');
-   chomp($edit_desc_text);
-   $edit_desc_text       = decode('utf8',$edit_desc_text);
-
-   my $edit_desc_label   = $frame_r_edit_1->Label( -text => "$edit_desc_text:" );
-   $edit_desc_label->grid( -row => 2, -column => 1, -sticky => 'nw' );
-
-   my $edit_desc_ent     = text_widget('ROText',$frame_r_edit_1,-1,0);
-   $edit_desc_ent->grid( -row => 2, -column => 2, -sticky => 'nw' );
-   $widgets{'manage_set:edit_desc_ent'} = $edit_desc_ent;
-
    # R_Edit   Substitution Values: Value
 
    my $edit_subst_text    = $lm->message($message_set,'manage_set: subst');
@@ -572,11 +579,24 @@ sub manage_set_create {
    $edit_subst_text       = decode('utf8',$edit_subst_text);
 
    my $edit_subst_label   = $frame_r_edit_1->Label( -text => "$edit_subst_text:" );
-   $edit_subst_label->grid( -row => 3, -column => 1, -sticky => 'nw' );
+   $edit_subst_label->grid( -row => 2, -column => 1, -sticky => 'nw' );
 
    my $edit_subst_ent     = text_widget('ROText',$frame_r_edit_1,-1,0);
-   $edit_subst_ent->grid( -row => 3, -column => 2, -sticky => 'nw' );
+   $edit_subst_ent->grid( -row => 2, -column => 2, -sticky => 'nw' );
    $widgets{'manage_set:edit_subst_ent'} = $edit_subst_ent;
+
+   # R_Edit   Description: Value
+
+   my $edit_desc_text    = $lm->message($message_set,'manage_set: desc');
+   chomp($edit_desc_text);
+   $edit_desc_text       = decode('utf8',$edit_desc_text);
+
+   my $edit_desc_label   = $frame_r_edit_1->Label( -text => "$edit_desc_text:" );
+   $edit_desc_label->grid( -row => 3, -column => 1, -sticky => 'nw' );
+
+   my $edit_desc_ent     = text_widget('ROText',$frame_r_edit_1,-3,0);
+   $edit_desc_ent->grid( -row => 3, -column => 2, -sticky => 'nw' );
+   $widgets{'manage_set:edit_desc_ent'} = $edit_desc_ent;
 
    # R_Edit   Def Message: [entry]
 
@@ -619,14 +639,23 @@ sub manage_set_create {
                                                         \$data{'ood'} );
    $edit_ood_chk->grid( -row => 6, -column => 2, -sticky => 'nw' );
 
-   # R_Edit  <Submit>
+   # R_Edit  <Submit> <Cancel>
 
-   $frame_r_edit->Button( -text    => $submit,
-                         -command =>
-                         sub {
-                            manage_set_submit_edit();
-                         }
-                       )->pack( -side => 'bottom', -pady => 10 );
+   my $frame_r_edit_butt = $frame_r_edit->Frame()->pack( -pady => 10 );
+
+   $frame_r_edit_butt->Button( -text    => $submit,
+                              -command =>
+                              sub {
+                                 manage_set_submit_edit();
+                              }
+                            )->pack( -side => 'left', -pady => 10 );
+
+   $frame_r_edit_butt->Button( -text    => $cancel,
+                              -command =>
+                              sub {
+                                 manage_set_cancel_edit();
+                              }
+                            )->pack( -side => 'right', -pady => 10 );
 
    ########################################
    # R_Exit   <Exit>
@@ -676,7 +705,7 @@ sub manage_set_clear {
    if ($data{'add'}) {
 
       $widgets{'manage_set:new_msgid_ent'}->delete(0,'end');
-      $widgets{'manage_set:new_desc_ent'}->delete(0,'end');
+      $widgets{'manage_set:new_desc_ent'}->delete('1.0','end');
       $widgets{'manage_set:new_subst_ent'}->delete(0,'end');
       $widgets{'manage_set:new_def_ent'}->delete('1.0','end');
 
@@ -698,7 +727,7 @@ sub manage_set_clear {
       $widgets{'manage_set:def_msgid_ent'}->delete(0,'end');
       $widgets{'manage_set:def_msgid_ent'}->insert('end',$msgid);
 
-      $widgets{'manage_set:def_desc_ent'}->delete(0,'end');
+      $widgets{'manage_set:def_desc_ent'}->delete('1.0','end');
       $widgets{'manage_set:def_desc_ent'}->insert
         ('end',decode('utf-8',$set{'desc'}{$msgid}{'desc'}));
 
@@ -784,6 +813,15 @@ sub manage_set_add_locale {
    frame_select('manage_set');
 }
 
+# The <Cancel> button was pressed in a new message operation.
+#
+sub manage_set_cancel_new {
+   $data{'add'}   = 0;
+   my @msgid      = sort keys %{ $set{'desc'} };
+   $data{'msgid'} = $msgid[0];
+   frame_select('manage_set');
+}
+
 # The <Submit> button was pressed in a new message operation.
 #
 sub manage_set_submit_new {
@@ -798,7 +836,7 @@ sub manage_set_submit_new {
       return;
    }
 
-   my $desc = $widgets{'manage_set:new_desc_ent'}->get();
+   my $desc = $widgets{'manage_set:new_desc_ent'}->get('1.0','end');
    $desc    = ''  if (! $desc);
    my $vals = $widgets{'manage_set:new_subst_ent'}->get();
 
@@ -826,6 +864,12 @@ sub manage_set_submit_new {
 
    $data{'add'}   = 0;
    $data{'msgid'} = $msgid;
+   frame_select('manage_set');
+}
+
+# The <Cancel> button was pressed in an edit default message operation.
+#
+sub manage_set_cancel_def {
    frame_select('manage_set');
 }
 
@@ -876,7 +920,7 @@ sub manage_set_submit_def {
    # to be updated, and the version doesn't need to change.
 
    $old     = $set{'desc'}{$data{'msgid'}}{'desc'};
-   $new     = $widgets{'manage_set:def_desc_ent'}->get();
+   $new     = $widgets{'manage_set:def_desc_ent'}->get('1.0','end');
    $new     = encode('UTF-8',$new);
 
    if ($old ne $new) {
@@ -944,6 +988,12 @@ sub manage_set_submit_def {
                                            $set{'lex'}{$lex});
    }
 
+   frame_select('manage_set');
+}
+
+# The <Cancel> button was pressed in a edit message operation.
+#
+sub manage_set_cancel_edit {
    frame_select('manage_set');
 }
 

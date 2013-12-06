@@ -4,24 +4,34 @@ In the lm_gui app:
 
 Add support for a Copyright in the generated modules.
 
-In the <Add Message> view, add a <Cancel> button that takes you back
-to the main <Manage Set> view.
-
 Add a <Delete Message> button in the left pane.
-
-Make the <Message Description> multi-line.
 
 Make text boxes automatically sized correctly, and resizable.  ROText
 should not need scroll bars.
-
-Add error if a lexicon contains a message not in the description.
 
 =====================================================================
 In Locale::VersionedMessages
 =====================================================================
 
-Quant conditions/strings can be enclosed in brackets or single/double
-quotes.  If they do not contain whitespace, they do not need to be
-enclosed at all.
+In the description file, include a description of the set.  This will
+be included in the POD file.
 
-Whitespace in quant strings is strictly honored (even in brackets).
+Allow different alternatives based on a string, not just numeric.  For
+example, in some languages:
+   his clothes
+   her clothes
+use different words for clothes based on masculine/feminine.  Similar
+differences also exist.  It would be nice to allow somthing similar to
+the plural situation:
+   VAL:element VALUE1 STRING1 VALUE2 STRING2 ... DEFAULT_STRING]
+so:
+   [hisher:element his '_hisher shirt' her '_hisher blouse' '_hisher top']
+would produce the following:
+   $obj->message('His/her top [hisher],'his')
+      => 'his shirt'
+   $obj->message('His/her top [hisher],'His')
+      => 'His shirt'
+   $obj->message('His/her top [hisher],'Her')
+      => 'Her blouse'
+   $obj->message('His/her top [hisher],"Jack's")
+      => "Jack's top"

@@ -20,109 +20,112 @@ $DefaultLocale = 'en_US';
 
 %Messages = (
    'button: add locale' => {
-      'desc'  => q{Add Locale button label},
+      'desc'  => 'Add Locale button label',
    },
    'button: add message' => {
-      'desc'  => q{Add Message button label},
+      'desc'  => 'Add Message button label',
    },
    'button: browse' => {
-      'desc'  => q{Browse button label},
+      'desc'  => 'Browse button label',
+   },
+   'button: cancel' => {
+      'desc'  => 'Cancel button label',
    },
    'button: exit' => {
-      'desc'  => q{Exit button label},
+      'desc'  => 'Exit button label',
    },
    'button: sel locale' => {
-      'desc'  => q{Select Locale button label},
+      'desc'  => 'Select Locale button label',
    },
    'button: submit' => {
-      'desc'  => q{Submit button label},
+      'desc'  => 'Submit button label',
    },
    'create_set: instructions' => {
-      'desc'  => q{Instructions on the create_set window.},
+      'desc'  => 'Instructions on the create_set window.',
    },
    'create_set: loc err' => {
-      'desc'  => q{create_set loc error message},
+      'desc'  => 'create_set loc error message',
    },
    'create_set: locale' => {
-      'desc'  => q{Label for <Default Locale> box.},
+      'desc'  => 'Label for <Default Locale> box.',
    },
    'create_set: window title' => {
-      'desc'  => q{Window title for create_set window.},
+      'desc'  => 'Window title for create_set window.',
       'vals'  => ['COM'],
    },
    'error' => {
-      'desc'  => q{Error label},
+      'desc'  => 'Error label',
    },
    'manage_set: curr' => {
-      'desc'  => q{Label for <Current Locale> box.},
+      'desc'  => 'Label for <Current Locale> box.',
    },
    'manage_set: def' => {
-      'desc'  => q{Label for <Default Locale> box.},
+      'desc'  => 'Label for <Default Locale> box.',
    },
    'manage_set: def mess instructions' => {
-      'desc'  => q{Instructions for editing a message in the default locale.},
+      'desc'  => 'Instructions for editing a message in the default locale.',
    },
    'manage_set: desc' => {
-      'desc'  => q{Label for <Message Description> box.},
+      'desc'  => 'Label for <Message Description> box.',
    },
    'manage_set: edit mess instructions' => {
-      'desc'  => q{Instructions for editing a message in a locale.},
+      'desc'  => 'Instructions for editing a message in a locale.',
    },
    'manage_set: leave version unmodified' => {
-      'desc'  => q{Label for <Leave Version Unmodified> box.},
+      'desc'  => 'Label for <Leave Version Unmodified> box.',
    },
    'manage_set: mark ood' => {
-      'desc'  => q{Label for <Mark Out-Of-Date> box.},
+      'desc'  => 'Label for <Mark Out-Of-Date> box.',
    },
    'manage_set: msgid' => {
-      'desc'  => q{Label for <Message ID> box.},
+      'desc'  => 'Label for <Message ID> box.',
    },
    'manage_set: msgid list' => {
-      'desc'  => q{Label for msgID listbox.},
+      'desc'  => 'Label for msgID listbox.',
       'vals'  => ['SET'],
    },
    'manage_set: new mess def err' => {
-      'desc'  => q{Creating a new message missing default text error.},
+      'desc'  => 'Creating a new message missing default text error.',
    },
    'manage_set: new mess instructions' => {
-      'desc'  => q{Instructions for creating a new message.},
+      'desc'  => 'Instructions for creating a new message.',
    },
    'manage_set: new mess msgid err' => {
-      'desc'  => q{Creating a duplicate message ID error.},
+      'desc'  => 'Creating a duplicate message ID error.',
    },
    'manage_set: subst' => {
-      'desc'  => q{Label for <Substitution Values> box.},
+      'desc'  => 'Label for <Substitution Values> box.',
    },
    'manage_set: window title' => {
-      'desc'  => q{Window title for manage_set window.},
+      'desc'  => 'Window title for manage_set window.',
       'vals'  => ['COM'],
    },
    'select_operation: desc err' => {
-      'desc'  => q{select_operation desc error message},
+      'desc'  => 'select_operation desc error message',
    },
    'select_operation: description' => {
-      'desc'  => q{Label for <Message Set Description> box.},
+      'desc'  => 'Label for <Message Set Description> box.',
    },
    'select_operation: directory' => {
-      'desc'  => q{Label for <Select Directory> box.},
+      'desc'  => 'Label for <Select Directory> box.',
    },
    'select_operation: err' => {
-      'desc'  => q{select_operation error message},
+      'desc'  => 'select_operation error message',
    },
    'select_operation: instructions_1' => {
-      'desc'  => q{Instructions on the select_operation window.},
+      'desc'  => 'Instructions on the select_operation window.',
    },
    'select_operation: instructions_2' => {
-      'desc'  => q{Instructions on the select_operation window.},
+      'desc'  => 'Instructions on the select_operation window.',
    },
    'select_operation: set' => {
-      'desc'  => q{Label for <Message Set> box.},
+      'desc'  => 'Label for <Message Set> box.',
    },
    'select_operation: set err' => {
-      'desc'  => q{select_operation set error message},
+      'desc'  => 'select_operation set error message',
    },
    'select_operation: window title' => {
-      'desc'  => q{Window title for select_operation window.},
+      'desc'  => 'Window title for select_operation window.',
       'vals'  => ['COM'],
    },
 );
@@ -130,6 +133,8 @@ $DefaultLocale = 'en_US';
 1;
 
 =pod
+
+=encoding utf-8
 
 =head1 NAME
 
@@ -140,5 +145,163 @@ Locale::VersionedMessages::Sets::lm_gui -- Description of the lm_gui message set
 This module is not intended for public use. It is used internally by
 Locale::VersionedMessages to store the description of a set of messages that
 will be localized for some application.
+
+This message set has been translated into the following locales:
+
+   en_US (Default locale)
+   fr_FR
+
+=head1 MESSAGE IDS
+
+The following message IDs are available in this message set:
+
+=over 4
+
+=item B<'button: add locale'>
+
+Add Locale button label
+
+=item B<'button: add message'>
+
+Add Message button label
+
+=item B<'button: browse'>
+
+Browse button label
+
+=item B<'button: cancel'>
+
+Cancel button label
+
+=item B<'button: exit'>
+
+Exit button label
+
+=item B<'button: sel locale'>
+
+Select Locale button label
+
+=item B<'button: submit'>
+
+Submit button label
+
+=item B<'create_set: instructions'>
+
+Instructions on the create_set window.
+
+=item B<'create_set: loc err'>
+
+create_set loc error message
+
+=item B<'create_set: locale'>
+
+Label for <Default Locale> box.
+
+=item B<'create_set: window title'>
+
+Substitution values: COM
+Window title for create_set window.
+
+=item B<'error'>
+
+Error label
+
+=item B<'manage_set: curr'>
+
+Label for <Current Locale> box.
+
+=item B<'manage_set: def'>
+
+Label for <Default Locale> box.
+
+=item B<'manage_set: def mess instructions'>
+
+Instructions for editing a message in the default locale.
+
+=item B<'manage_set: desc'>
+
+Label for <Message Description> box.
+
+=item B<'manage_set: edit mess instructions'>
+
+Instructions for editing a message in a locale.
+
+=item B<'manage_set: leave version unmodified'>
+
+Label for <Leave Version Unmodified> box.
+
+=item B<'manage_set: mark ood'>
+
+Label for <Mark Out-Of-Date> box.
+
+=item B<'manage_set: msgid'>
+
+Label for <Message ID> box.
+
+=item B<'manage_set: msgid list'>
+
+Substitution values: SET
+Label for msgID listbox.
+
+=item B<'manage_set: new mess def err'>
+
+Creating a new message missing default text error.
+
+=item B<'manage_set: new mess instructions'>
+
+Instructions for creating a new message.
+
+=item B<'manage_set: new mess msgid err'>
+
+Creating a duplicate message ID error.
+
+=item B<'manage_set: subst'>
+
+Label for <Substitution Values> box.
+
+=item B<'manage_set: window title'>
+
+Substitution values: COM
+Window title for manage_set window.
+
+=item B<'select_operation: desc err'>
+
+select_operation desc error message
+
+=item B<'select_operation: description'>
+
+Label for <Message Set Description> box.
+
+=item B<'select_operation: directory'>
+
+Label for <Select Directory> box.
+
+=item B<'select_operation: err'>
+
+select_operation error message
+
+=item B<'select_operation: instructions_1'>
+
+Instructions on the select_operation window.
+
+=item B<'select_operation: instructions_2'>
+
+Instructions on the select_operation window.
+
+=item B<'select_operation: set'>
+
+Label for <Message Set> box.
+
+=item B<'select_operation: set err'>
+
+select_operation set error message
+
+=item B<'select_operation: window title'>
+
+Substitution values: COM
+Window title for select_operation window.
+
+
+=back
 
 =cut

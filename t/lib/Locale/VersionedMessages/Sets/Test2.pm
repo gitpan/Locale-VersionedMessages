@@ -69,6 +69,10 @@ $DefaultLocale = 'en_US';
       'desc'  => q{Quantity substitution message #3a [n]},
       'vals'  => ['n'],
    },
+   'Subst_3b' => {
+      'desc'  => q{Quantity substitution message #3b [n]},
+      'vals'  => ['n'],
+   },
 );
 
 1;

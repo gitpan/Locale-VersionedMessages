@@ -83,20 +83,20 @@ our $usage=
 
 ";
 
-=pod
+#pod
 
-=head1 NAME
+#head1 NAME
 
 lm_admin - simple tool for managine Locale::VersionedMessages lexicons
 
-=head1 SYNOPSIS
+#head1 SYNOPSIS
 
 This tool can be used to maintain the lexicon files used by the
 Locale::VersionedMessages perl module.
 
    lm_admin [OPERATION] [OPTIONS]
 
-=head1 DESCRIPTION
+#head1 DESCRIPTION
 
 The Locale::VersionedMessages module allows translation tables (i.e. lexicons) for
 a set of message to be stored in perl modules to be used in a localized
@@ -205,25 +205,25 @@ without flagging all other locales as out-of-date, or making a similar
 simple correction to another locale without actually comparing it to
 the default locale (which might have changed in more extensive ways).
 
-=head1 KNOWN BUGS
+#head1 KNOWN BUGS
 
 None known.
 
-=head1 BUGS AND QUESTIONS
+#head1 BUGS AND QUESTIONS
 
 Please refer to the Locale::VersionedMessages documentation for information on
 submitting bug reports or questions to the author.
 
-=head1 SEE ALSO
+#head1 SEE ALSO
 
 Locale::VersionedMessages
 
-=head1 LICENSE
+#head1 LICENSE
 
 This script is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
 
-=head1 AUTHOR
+#head1 AUTHOR
 
 Sullivan Beck (sbeck@cpan.org)
 

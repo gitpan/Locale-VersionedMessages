@@ -11,7 +11,7 @@ SYNOPSIS
 
 DESCRIPTION
     Although several modules exist for handling internationalization and
-    localization of a prgram, they are missing functionality for dealing
+    localization of a program, they are missing functionality for dealing
     with all of the functions to perform the task fully. Existing modules
     work fine with respect to a programmer who wants to access localized
     messages, but the modules do not contain the necessary functions to
@@ -44,7 +44,7 @@ DESCRIPTION
     the version of every message in every locale. Although this information
     is not typically useful to those programmers who are simply looking up
     messages in the table, it is extremely useful to those who are
-    responsible for translating and maintaing the messages.
+    responsible for translating and maintaining the messages.
 
 METHODS
     The following methods are available:
@@ -138,9 +138,9 @@ METHODS
 
            $obj->search('BUTTONS','en','en_US','en_GB');
 
-        would looke for a messages in the 'BUTTONS' set in the locales:
-        'en', 'en_US', and 'en_GB' in that order. If a message were not
-        found in any of those three, the default locale would be used.
+        would look for a messages in the 'BUTTONS' set in the locales: 'en',
+        'en_US', and 'en_GB' in that order. If a message were not found in
+        any of those three, the default locale would be used.
 
     query_search
            @locale = $obj->query_search();
@@ -196,9 +196,9 @@ MESSAGE SUBSTITUTIONS
     information (such as a description of the message) may also be provided,
     but is not relevant to message substitution.
 
-    If one of the substition variables is named 'foo', then anywhere in the
-    message, I can include '[foo...]' and that portion of the message will
-    be replaced based on the value of foo that is passed in.
+    If one of the substitution variables is named 'foo', then anywhere in
+    the message, I can include '[foo...]' and that portion of the message
+    will be replaced based on the value of foo that is passed in.
 
     The syntax of the substitution string can be any of the following:
 
@@ -238,16 +238,22 @@ MESSAGE SUBSTITUTIONS
 
         The general form of this is:
 
-           [VAL:quant [COND1] [STRING1] [COND2] [STRING2] ... [DEFAULT_STRING]]
+           [VAL:quant COND1 STRING1 COND2 STRING2 ... DEFAULT_STRING]
+
+        Each of the tokens in this form (CONDi, STRINGi, and DEFAULT_STRING)
+        can be a string that is wrapped in square brackets, single, or
+        double quotes. So, the string foobar can appear as foobar, [foobar],
+        'foobar', or "foobar". If a token starts with a square bracket, or a
+        single or double quote, it must be wrapped in one of the others.
 
         Each CONDi is a string involving a correctly specified numerical
         test. It should be noted that the tests are NOT passed to the perl
-        interpreter (via eval), so the full perl syntax is not supported.
-        Since tests are specified in user (i.e. translator) defined files,
-        passing portions of these files to eval would represent a security
-        risk, so instead, the condition strings are manually parsed, and
-        only a limited syntax is supported. However, the sytax should be
-        flexible enough to handle all real-life cases.
+        interpreter, so the full perl syntax is not supported. Since tests
+        are specified in user (i.e. translator) defined files, passing
+        portions of these files to eval would represent a security risk, so
+        instead, the condition strings are manually parsed, and only a
+        limited syntax is supported. However, the syntax should be flexible
+        enough to handle all real-life cases.
 
         A condition can be a simple test. Simple tests are all of one of the
         forms:
@@ -284,7 +290,7 @@ MESSAGE SUBSTITUTIONS
 
            Set:        Set1
            Message ID: Number of oranges [n]
-           Text:       I have [n:quant [_n>1] [_n oranges] [_n==1] [1 orange] [no oranges]].
+           Text:       I have [n:quant [_n>1] '_n oranges' _n==1 "1 orange" [no oranges]].
 
         and:
 
@@ -297,13 +303,11 @@ MESSAGE SUBSTITUTIONS
            $obj->message('Set1','Number of oranges [n]',0);
               => 'I have no oranges.'
 
-        Note that all conditions and strings are enclosed in square
-        brackets, and that none of the strings may include square brackets
-        in them. Also note that it is not required that '_VAL' be included
-        in every one of the strings. It can be included zero, one, or even
-        multiple times if desired.
+        Note that it is not required that '_VAL' be included in every one of
+        the strings. It can be included zero, one, or even multiple times if
+        desired.
 
-    Most whitespace is ignored, so the following are quivalent:
+    Most whitespace is ignored, so the following are equivalent:
 
        [foo]
        [ foo ]
@@ -321,8 +325,8 @@ SEE ALSO
     internationalization problem with a comparison to other Locale::*
     modules
 
-    lm_admin A command-line tool for creating and maintaing sets of messages
-    and their translation tables.
+    lm_gui A GUI tool for creating and maintaining sets of messages and
+    their translation tables.
 
 LICENSE
     This script is free software; you can redistribute it and/or modify it

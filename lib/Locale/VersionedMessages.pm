@@ -5,12 +5,12 @@ package Locale::VersionedMessages;
 
 ########################################################################
 
-require 5.008000;
+require 5.008;
 use strict;
 use warnings;
 
 our($VERSION);
-$VERSION = "0.91";
+$VERSION = "0.92";
 
 ########################################################################
 # METHODS
@@ -368,27 +368,68 @@ sub _fix_message {
 
 # This does the acutal substitution for a single substitution value.
 #
+# If the substitution is found, $done = 1 will be returned.
+#
 sub _substitute {
    my($self,$set,$msgid,$locale,$message,$var,$val) = @_;
+   my $done     = 0;
+
+   # Simple substitutions: [foo]
+
+   if ($message =~ s/\[\s*$var\s*\]/$val/sg) {
+      $done = 1;
+   }
+
+   # Formatted substitutions: [ foo : FORMAT ]
+
+   my $fmt_re = qr/\s*:\s*(%.*?)/;
+
+   while ($message =~ s/\[\s*$var$fmt_re\s*\]/__L_M_TMP__/s) {
+      my $fmt = $1;
+
+      no warnings;
+      $val = sprintf($fmt,$val);
+      use warnings;
+      if ($val eq $fmt) {
+         $$self{'err'} = "Invalid sprintf format: $msgid [$locale $var]";
+         return;
+      }
+      $message =~ s/__L_M_TMP__/$val/s;
+      $done    = 1;
+   }
+
+   # Quant substitutions: [ foo : quant [ : FORMAT ] ... ]
+
+   my ($msg,$d) = $self->_quant($set,$msgid,$locale,$message,$var,$val);
+   return       if ($$self{'err'});
+   $message     = $msg;
+   $done        = $d  if ($d);
+
+   return ($message,$done);
+}
+
+# This tests a string for any quant substitutions and returns the
+# string.
+#
+sub _quant {
+   my($self,$set,$msgid,$locale,$mess,$var,$val) = @_;
+
    my $val_orig = $val;
+   my $fmt_re   = qr/\s*:\s*(%.*?)/;
+   my $brack_re = qr/\s+\[([^]]*?)\]/;
+   my $sq_re    = qr/\s+'([^']*?)'/;
+   my $dq_re    = qr/\s+"([^"]*?)"/;
+   my $ws_re    = qr/\s+(\S*)/;
+   my $tok_re   = qr/(?:$brack_re|$sq_re|$dq_re|$ws_re)/;
+   my $tmp      = '__L_M_TMP__';
    my $done     = 0;
 
    SUBST:
-   while (1) {
+   while ($mess =~ s/\[\s*$var\s*:\s*quant\s*(?:$fmt_re)?($tok_re+)\s*\]/$tmp/s) {
+      my $fmt   = $1;
+      my $tokens= $2;
 
-      # Simple substitutions: [foo]
-
-      if ($message =~ s/\[\s*$var\s*\]/$val/sg) {
-         $done = 1;
-      }
-
-      # Formatted substitutions: [ foo : FORMAT ]
-
-      my $fmt_re = qr/\s*:\s*(%.*?)/;
-
-      while ($message =~ s/\[\s*$var$fmt_re\s*\]/__L_M_TMP__/s) {
-         my $fmt = $1;
-
+      if ($fmt) {
          no warnings;
          $val = sprintf($fmt,$val);
          use warnings;
@@ -396,71 +437,49 @@ sub _substitute {
             $$self{'err'} = "Invalid sprintf format: $msgid [$locale $var]";
             return;
          }
-         $message =~ s/__L_M_TMP__/$val/s;
-         $done    = 1;
       }
 
-      # Quant substitutions: [ foo : quant [ : FORMAT ] ... ]
-
-      my $brack_re = qr/\s*\[([^]]*?)\]/;
-
-      SUBST:
-      while ($message =~ s/\[\s*$var\s*:\s*quant\s*(?:$fmt_re)?($brack_re+)\s*\]/__L_M_TMP__/s) {
-         my $fmt   = $1;
-         my $brack = $2;
-
-         if ($fmt) {
-            no warnings;
-            $val = sprintf($fmt,$val);
-            use warnings;
-            if ($val eq $fmt) {
-               $$self{'err'} = "Invalid sprintf format: $msgid [$locale $var]";
-               return;
-            }
-         }
-
-         my @brack;
-         while ($brack =~ s/^$brack_re//) {
-            push(@brack,$1);
-         }
-
-         if (@brack % 2 == 0) {
-            $$self{'err'} = "Default string required in quant substitution: " .
-                            "$msgid [$locale $var]";
-            return;
-         }
-
-         # @brack is (TEST, STRING, TEST, STRING, ..., DEFAULT_STRING)
-
-         while (@brack) {
-            my $ele = shift(@brack);
-            if (! @brack) {
-               # Default string
-               $ele     =~ s/_$var/$val/g;
-               $message =~ s/__L_M_TMP__/$ele/s;
-               $done    = 1;
-               next SUBST;
-            }
-
-            my $flag = $self->_test($set,$msgid,$locale,$var,$val_orig,$ele);
-            return  if ($$self{'err'});
-
-            $ele     = shift(@brack);
-            if ($flag) {
-               $ele     =~ s/_$var/$val/g;
-               $message =~ s/__L_M_TMP__/$ele/s;
-               $done    = 1;
-               next SUBST;
-            }
-         }
-
-         1;
+      my @tok;
+      while ($tokens =~ s/^$tok_re//) {
+         push(@tok, $1 || $2 || $3 || $4);
       }
 
-      last SUBST;
+      if (@tok % 2 == 0) {
+         $$self{'err'} = "Default string required in quant substitution: " .
+                         "$msgid [$locale $var]";
+         return;
+      }
+
+      # @tok is (TEST, STRING, TEST, STRING, ..., DEFAULT_STRING)
+
+      while (@tok) {
+         my $ele = shift(@tok);
+
+         # DEFAULT_STRING
+
+         if (! @tok) {
+            $ele  =~ s/_$var/$val/g;
+            $mess =~ s/$tmp/$ele/s;
+            $done = 1;
+            next SUBST;
+         }
+
+         # TEST, STRING
+
+         my $flag = $self->_test($set,$msgid,$locale,$var,$val_orig,$ele);
+         return  if ($$self{'err'});
+
+         $ele     = shift(@tok);
+         if ($flag) {
+            $ele  =~ s/_$var/$val/g;
+            $mess =~ s/$tmp/$ele/s;
+            $done = 1;
+            next SUBST;
+         }
+      }
    }
 
-   return ($message,$done);
+   return($mess,$done);
 }
 
 # This parses a condition string and returns 1 if the condition is true for

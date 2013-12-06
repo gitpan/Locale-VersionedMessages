@@ -3,12 +3,11 @@ abstract: 'handle all aspects of the localization process'
 author:
   - 'Sullivan Beck <sbeck@cpan.org>'
 build_requires:
-  Test::Inter: 1.04
-  lib: 0
+  Module::Build: 0.21
 configure_requires:
-  Module::Build: 0.39
+  Module::Build: 0.21
 dynamic_config: 1
-generated_by: 'Module::Build version 0.3901, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Module::Build version 0.4007, CPAN::Meta::Converter version 2.132830'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,23 +16,17 @@ name: Locale-VersionedMessages
 provides:
   Locale::VersionedMessages:
     file: lib/Locale/VersionedMessages.pm
-    version: 0.91
+    version: 0.92
   Locale::VersionedMessages::Sets::lm_gui:
     file: lib/Locale/VersionedMessages/Sets/lm_gui.pm
-    version: 0
-  Locale::VersionedMessages::Sets::lm_gui::en_US:
-    file: lib/Locale/VersionedMessages/Sets/lm_gui/en_US.pm
-    version: 0
-  Locale::VersionedMessages::Sets::lm_gui::fr_FR:
-    file: lib/Locale/VersionedMessages/Sets/lm_gui/fr_FR.pm
-    version: 0
-  Locale::VersionedMessages::lm:
-    file: lib/Locale/VersionedMessages/lm.pm
-    version: 0
 requires:
   File::Path: 0
   IO::File: 0
-  perl: 5.010000
+  perl: 5.008
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.91
+version: 0.92
+x_test_requires:
+  Test::Inter: 1.04
+  Test::More: 0
+  lib: 0

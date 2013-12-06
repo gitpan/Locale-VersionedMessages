@@ -1,14 +1,15 @@
 bin/lm_gui
 Build.PL
-HISTORY
+Changes
 INSTALL
 internal/build.yaml
+internal/ispell.isp
 internal/lm_admin
+internal/NOTES
 internal/TODO
 lib/Locale/VersionedMessages.pm
 lib/Locale/VersionedMessages.pod
 lib/Locale/VersionedMessages/lm.pm
-lib/Locale/VersionedMessages/lm.pod
 lib/Locale/VersionedMessages/Overview.pod
 lib/Locale/VersionedMessages/Sets/lm_gui.pm
 lib/Locale/VersionedMessages/Sets/lm_gui/en_US.pm
@@ -29,7 +30,9 @@ t/lib/Locale/VersionedMessages/Sets/Test2/en_US.pm
 t/lib/Locale/VersionedMessages/Sets/Test2/fr_FR.pm
 t/message.t
 t/message_2.t
+t/pod.ign
 t/pod.t
+t/pod_coverage.ign
 t/pod_coverage.t
 t/runtests
 t/runtests.bat

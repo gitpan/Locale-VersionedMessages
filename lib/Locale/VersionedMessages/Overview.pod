@@ -106,7 +106,7 @@ of support for this operation.
 
 Translating a message is typically not done by a single individual.
 It's done by many people (typically one per locale) who have different
-timelines, different levels of attention to detail, and different
+time lines, different levels of attention to detail, and different
 amounts of time they can devote to the task.  As such, if you give
 them a list of messages to maintain, in order to do so effectively,
 they need to know something about which ones are up-to-date, and which
@@ -119,7 +119,7 @@ this step.
 =back
 
 Once the lexicons are created, actually using them in a program
-is typcially a fairly simple task.
+is typically a fairly simple task.
 
 A number of modules exist which handle various portions of the
 internationalization task, however none exist which provide the tools
@@ -153,7 +153,7 @@ a few characteristics:
 
 Translations can be stored as data files or perl modules.  Data files
 are a bit harder to handle in a platform-neutral way, and tend to be
-less flexible, but are typcially easier to maintain.
+less flexible, but are typically easier to maintain.
 
 From a perl perspective, one disadvantage with using data files is
 that they are outside of the perl framework, and are stored simply as
@@ -209,7 +209,7 @@ described briefly.
 =back
 
 For this comparison, I will use B<Locale::gettext> and
-B<Locale::Maketext> in addition to <Locale::VersionedMessages>.
+B<Locale::Maketext> in addition to B<Locale::VersionedMessages>.
 
 =over 4
 
@@ -237,7 +237,7 @@ This will be discussed below.
 The basic file in the gettext world is the PO file. In it's simplest
 form, this consists of a file which contains a series of messages,
 each of which consists of a message ID and the text. A simple,
-one-message PO file containing the example message (for a french
+one-message PO file containing the example message (for a French
 locale) might look like:
 
    msgid  "Unable to open file %s: Err = %s\n"
@@ -311,7 +311,7 @@ The primary module is:
 This contains the default lexicon.  In addition, there are other modules:
    _PROGRAM_::_SOMETHING_::_LOCALE_
 which contain additional lexicons.  Here, _SOMETHING_ can be any
-string chosen by the programmer to specify that these are mesages used
+string chosen by the programmer to specify that these are messages used
 by _PROGRAM_.  By convention, it is something like: 'I18N', or
 'Messages', or 'Localization', etc., but this is not a requirement.
 
@@ -332,7 +332,7 @@ Again, by convention, the untranslated message is often used as the
 message ID, and the default lexicon can basically be empty in this
 case.
 
-Aside from that, this method has a number of potential advantatages
+Aside from that, this method has a number of potential advantages
 over the gettext.
 
 Since the lexicons are hashes, other information could be stored in
@@ -377,7 +377,7 @@ up the lexicons.
 
 All handling of the messages is done manually, and this definitely
 hampers the practical usefulness of this toolkit to those responsible
-for maintaining a tranlsation.
+for maintaining a translation.
 
 =item B<Locale::VersionedMessages>
 
@@ -424,7 +424,7 @@ that currently the values of 'desc' (in the description module) and 'text'
 (in the lexicon modules) can be UTF-8.  All other values are straight ASCII.
 
 It should be noted that SET is explicitly NOT defined to be the name
-of a program.  I would like to encourage creation of resuable sets of
+of a program.  I would like to encourage creation of reusable sets of
 messages, so there could be a set called IO_Errors (which contained
 common I/O errors), Buttons (which contained common button labels used
 in programs), etc.
@@ -535,19 +535,19 @@ lexicon, and this is a significant weakness in them.
 =head1 LOCALE::MESSAGES TOOLS
 
 Currently, the Locale::VersionedMessages distribution includes one tool
-(B<lm_gui>) which is a perl-Tk based graphical tool for managing
+(B<lm_gui>) which is a Perl-Tk based graphical tool for managing
 message sets and lexicons.  At some point, a command line tool may
 also be made available, but it is not yet ready for general use.
 
 The B<lm_gui> tool is not as pretty as I'd like.  It is based on
-my somewhat limited knowledge and experience with perl-Tk, so it is
+my somewhat limited knowledge and experience with Perl-Tk, so it is
 definitely not the most polished application, but it is fully
 functional (and I plan on improving it's look over time).
 
-In addition, it's fully localized, so it can be used, both as the tool
-to manage your own localization, but a reference example.  It should
-be noted that all messages should be entered as UTF-8 text, NOT in
-some other encoding.  Future versions of the tool may support
+In addition, it's fully localized, so it can be used both as the tool
+to manage your own localization, and as a complete reference example.
+It should be noted that all messages should be entered as UTF-8 text,
+NOT in some other encoding.  Future versions of the tool may support
 additional encodings.
 
 The B<lm_gui> tool will read and write the perl modules that
@@ -632,7 +632,7 @@ When modifying the text of the message, by default, the version number
 in the default lexicon will be incremented.  This will have the effect of
 flagging the message in all other lexicons as out-of-date.  If the change
 to the message is so simple that it should not increment the version
-(such as fixing a typo or simple gramatical error), click on the B<Leave
+(such as fixing a typo or simple grammatical error), click on the B<Leave
 Version Unmodified> box.
 
 When working with other lexicons, the list of message IDs will be

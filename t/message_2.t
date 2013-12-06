@@ -107,6 +107,12 @@ message Test2 Subst_3a fr_FR n 2 =>
 message Test2 Subst_3a fr_FR n 3 =>
    'Substitution message 3a with 3 values in French.__nl__'
 
+message Test2 Subst_3b en_US n 1 =>
+   'Substitution message 3b with one value in English.__nl__'
+
+message Test2 Subst_3b en_US n 2 =>
+   'Substitution message 3b with  2 values in English.__nl__'
+
 ";
 
 $t->tests(func  => \&test,

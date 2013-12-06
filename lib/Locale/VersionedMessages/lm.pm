@@ -1,10 +1,11 @@
-package Locale::VersionedMessages::lm;
+package #
+Locale::VersionedMessages::lm;
 # Copyright (c) 2010-2013 Sullivan Beck.  All rights reserved.
 # This program is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 
 ###############################################################################
-require 5.010000;
+require 5.008;
 use IO::File;
 
 use strict;
@@ -13,32 +14,6 @@ use warnings;
 
 use IO::File;
 use File::Path qw(make_path);
-
-=pod
-
-=head1 NAME
-
-Locale::VersionedMessages::lm -- Internal module used by tools
-
-=head1 DESCRIPTION
-
-This module is not intended for public use. It is used internally by
-the tools that are distributed with the Locale-Messages distribution.
-
-=head1 SEE ALSO
-
-Locale::VersionedMessages
-
-=head1 LICENSE
-
-This script is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
-
-=head1 AUTHOR
-
-Sullivan Beck (sbeck@cpan.org)
-
-=cut
 
 ###############################################################################
 
@@ -109,7 +84,11 @@ sub _set_write {
       die "ERROR: unable to write set file: $f: $!\n";
    }
 
-   print $out "package Locale::VersionedMessages::Sets::${set};
+   my $pod  = "pod";   # So I can avoid indexing this as a pod
+   my $head = "head1";
+
+   print $out
+"package Locale::VersionedMessages::Sets::${set};
 ####################################################
 #        *** WARNING WARNING WARNING ***
 #
@@ -137,7 +116,10 @@ our(\$DefaultLocale,\@AllLocale,\%Messages);
 
       if (exists $$messages{$msgid}{'desc'}) {
          my $desc = $$messages{$msgid}{'desc'};
-         print $out "      'desc'  => q{$desc},\n";
+         while (chomp($desc)) {};
+         $$messages{$msgid}{'desc'} = $desc;
+         $desc    =~ s,',\\',g;
+         print $out "      'desc'  => '$desc',\n",
       }
 
       if (exists $$messages{$msgid}{'vals'}) {
@@ -153,17 +135,56 @@ our(\$DefaultLocale,\@AllLocale,\%Messages);
 
 1;
 
-=pod
+=$pod
 
-=head1 NAME
+=encoding utf-8
+
+=$head NAME
 
 Locale::VersionedMessages::Sets::$set -- Description of the $set message set
 
-=head1 DESCRIPTION
+=$head DESCRIPTION
 
 This module is not intended for public use. It is used internally by
 Locale::VersionedMessages to store the description of a set of messages that
 will be localized for some application.
+
+This message set has been translated into the following locales:
+
+   $def_locale (Default locale)
+";
+
+   foreach my $locale (@oth_locale) {
+      print $out "   $locale\n";
+   }
+
+   print $out "
+=$head MESSAGE IDS
+
+The following message IDs are available in this message set:
+
+=over 4
+
+";
+
+   foreach my $msgid (sort keys %$messages) {
+      print $out "=item B<'$msgid'>\n\n";
+
+      if (exists $$messages{$msgid}{'vals'}) {
+         my @vals = @{ $$messages{$msgid}{'vals'} };
+         my $vals = join(' ',@vals);
+         print $out "Substitution values: $vals\n";
+      }
+
+      if (exists $$messages{$msgid}{'desc'}) {
+         my $desc = $$messages{$msgid}{'desc'};
+         print $out "$desc\n";
+      }
+      print $out "\n";
+   }
+
+   print $out "
+=back
 
 =cut
 ";
@@ -237,7 +258,8 @@ sub _lexicon_write {
       die "ERROR: unable to write lexicon: $f: $!\n";
    }
 
-   print $out "package Locale::VersionedMessages::Sets::${set}::${locale};
+   print $out "package #
+Locale::VersionedMessages::Sets::${set}::${locale};
 ####################################################
 #        *** WARNING WARNING WARNING ***
 #
@@ -269,6 +291,8 @@ our(\%Messages);
 
       if (exists $$messages{$msgid}{'text'}) {
          my $text = $$messages{$msgid}{'text'};
+         while (chomp($text)) {};
+         $$messages{$msgid}{'text'} = $text;
          $text    =~ s,',\\',g;
          print $out "      'text'  => '$text',\n",
       }
@@ -279,20 +303,6 @@ our(\%Messages);
    print $out ");
 
 1;
-
-=pod
-
-=head1 NAME
-
-Locale::VersionedMessages::Sets::${set}::${locale} -- Localized messages
-
-=head1 DESCRIPTION
-
-This module is not intended for public use. It is used internally by
-Locale::VersionedMessages to store the lexicon for the set of messages ($set)
-translated into the locale ($locale).
-
-=cut
 ";
 
    $out->close();

@@ -79,6 +79,11 @@ our(%Messages);
       'text'  => 'Substitution message 3a with [n:quant [_n==1] [one value] [_n values]] in English.
 ',
    },
+   'Subst_3b' => {
+      'vers'  => 2,
+      'text'  => q(Substitution message 3b with [n:quant _n==1 'one value' " _n values"] in English.
+),
+   },
 );
 
 1;
