@@ -1,6 +1,6 @@
 package #
 Locale::VersionedMessages::lm;
-# Copyright (c) 2010-2013 Sullivan Beck.  All rights reserved.
+# Copyright (c) 2010-2014 Sullivan Beck.  All rights reserved.
 # This program is free software; you can redistribute it and/or modify it
 # under the same terms as Perl itself.
 
@@ -71,12 +71,20 @@ use strict 'refs';
 
 # Write the message set module.
 #
+no strict 'refs';
 sub _set_write {
    my($set,$dir,$messages,$def_locale,@oth_locale) = @_;
 
    my $m   = "Locale::VersionedMessages::Sets::$set";
    my $d   = "$dir/Locale/VersionedMessages/Sets";
    my $f   = "$d/$set.pm";
+
+   my $c0  = ${ "${m}::CopyrightBeg" };
+   my $c1  = ${ "${m}::CopyrightEnd" };
+   if (! $c0) {
+      $c0  = ( localtime(time) )[5] + 1900;
+   }
+   $c1     = ( localtime(time) )[5] + 1900;
 
    my $out = new IO::File;
 
@@ -99,9 +107,13 @@ sub _set_write {
 # Any changes to this file may be lost the next
 # time these commands are run.
 ####################################################
+# Copyright $c0-$c1
 
 use strict;
 use warnings;
+
+our \$CopyrightBeg = $c0;
+our \$CopyrightEnd = $c1;
 
 our(\$DefaultLocale,\@AllLocale,\%Messages);
 
@@ -173,7 +185,7 @@ The following message IDs are available in this message set:
       if (exists $$messages{$msgid}{'vals'}) {
          my @vals = @{ $$messages{$msgid}{'vals'} };
          my $vals = join(' ',@vals);
-         print $out "Substitution values: $vals\n";
+         print $out "Substitution values: $vals\n\n";
       }
 
       if (exists $$messages{$msgid}{'desc'}) {
@@ -191,6 +203,7 @@ The following message IDs are available in this message set:
 
    $out->close();
 }
+use strict 'refs';
 
 ###############################################################################
 
@@ -246,11 +259,20 @@ use strict 'refs';
 
 # Write a lexicon module.
 #
+no strict 'refs';
 sub _lexicon_write {
    my($set,$dir,$locale,$messages) = @_;
 
+   my $m = "Locale::VersionedMessages::Sets::${set}::${locale}";
    my $d = "$dir/Locale/VersionedMessages/Sets/$set";
    my $f = "$d/$locale.pm";
+
+   my $c0  = ${ "${m}::CopyrightBeg" };
+   my $c1  = ${ "${m}::CopyrightEnd" };
+   if (! $c0) {
+      $c0  = ( localtime(time) )[5] + 1900;
+   }
+   $c1     = ( localtime(time) )[5] + 1900;
 
    my $out = new IO::File;
 
@@ -270,9 +292,13 @@ Locale::VersionedMessages::Sets::${set}::${locale};
 # Any changes to this file may be lost the next
 # time these commands are run.
 ####################################################
+# Copyright $c0-$c1
 
 use strict;
 use warnings;
+
+our \$CopyrightBeg = $c0;
+our \$CopyrightEnd = $c1;
 
 our(\%Messages);
 
@@ -307,6 +333,7 @@ our(\%Messages);
 
    $out->close();
 }
+use strict 'refs';
 
 1;
 

@@ -9,6 +9,10 @@ Add a <Delete Message> button in the left pane.
 Make text boxes automatically sized correctly, and resizable.  ROText
 should not need scroll bars.
 
+In generated POD file, make sure that there is a \n:
+   Substitution values: VALUES \n
+   Desc
+
 =====================================================================
 In Locale::VersionedMessages
 =====================================================================
@@ -16,22 +20,3 @@ In Locale::VersionedMessages
 In the description file, include a description of the set.  This will
 be included in the POD file.
 
-Allow different alternatives based on a string, not just numeric.  For
-example, in some languages:
-   his clothes
-   her clothes
-use different words for clothes based on masculine/feminine.  Similar
-differences also exist.  It would be nice to allow somthing similar to
-the plural situation:
-   VAL:element VALUE1 STRING1 VALUE2 STRING2 ... DEFAULT_STRING]
-so:
-   [hisher:element his '_hisher shirt' her '_hisher blouse' '_hisher top']
-would produce the following:
-   $obj->message('His/her top [hisher],'his')
-      => 'his shirt'
-   $obj->message('His/her top [hisher],'His')
-      => 'His shirt'
-   $obj->message('His/her top [hisher],'Her')
-      => 'Her blouse'
-   $obj->message('His/her top [hisher],"Jack's")
-      => "Jack's top"

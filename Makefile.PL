@@ -32,7 +32,7 @@ if ($ExtUtils::MakeMaker::VERSION < 6.64) {
 
 WriteMakefile(
    NAME             => "Locale::VersionedMessages",
-   VERSION          => "0.92",
+   VERSION          => "0.93",
    ABSTRACT         => "handle all aspects of the localization process",
    LICENSE          => "perl",
    ($ExtUtils::MakeMaker::VERSION >= 6.48

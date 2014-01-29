@@ -9,9 +9,13 @@ package Locale::VersionedMessages::Sets::lm_gui;
 # Any changes to this file may be lost the next
 # time these commands are run.
 ####################################################
+# Copyright 2014-2014
 
 use strict;
 use warnings;
+
+our $CopyrightBeg = 2014;
+our $CopyrightEnd = 2014;
 
 our($DefaultLocale,@AllLocale,%Messages);
 
@@ -200,6 +204,7 @@ Label for <Default Locale> box.
 =item B<'create_set: window title'>
 
 Substitution values: COM
+
 Window title for create_set window.
 
 =item B<'error'>
@@ -241,6 +246,7 @@ Label for <Message ID> box.
 =item B<'manage_set: msgid list'>
 
 Substitution values: SET
+
 Label for msgID listbox.
 
 =item B<'manage_set: new mess def err'>
@@ -262,6 +268,7 @@ Label for <Substitution Values> box.
 =item B<'manage_set: window title'>
 
 Substitution values: COM
+
 Window title for manage_set window.
 
 =item B<'select_operation: desc err'>
@@ -299,6 +306,7 @@ select_operation set error message
 =item B<'select_operation: window title'>
 
 Substitution values: COM
+
 Window title for select_operation window.
 
 

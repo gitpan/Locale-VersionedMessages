@@ -21,3 +21,8 @@ Any suggestions, bug reports, or donations :-) should be sent to me.
   - Documentation improvements.
   - Changed HISTORY file to new Changes specification.
 
+0.93  2014-01-29
+  - Fixed pod files to not give any errors.
+  - Added copyright to the generated lexicons.
+  - Cleaned up pod in generated files.
+
