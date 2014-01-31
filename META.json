@@ -42,7 +42,7 @@
    "provides" : {
       "Locale::VersionedMessages" : {
          "file" : "lib/Locale/VersionedMessages.pm",
-         "version" : "0.93"
+         "version" : "0.94"
       },
       "Locale::VersionedMessages::Sets::lm_gui" : {
          "file" : "lib/Locale/VersionedMessages/Sets/lm_gui.pm"
@@ -54,5 +54,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.93"
+   "version" : "0.94"
 }

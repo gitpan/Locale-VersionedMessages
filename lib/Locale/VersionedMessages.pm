@@ -9,8 +9,8 @@ require 5.008;
 use strict;
 use warnings;
 
-our($VERSION);
-$VERSION = "0.93";
+our $VERSION;
+$VERSION='0.94';
 
 ########################################################################
 # METHODS

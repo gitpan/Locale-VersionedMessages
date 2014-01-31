@@ -38,7 +38,7 @@ my $class = Module::Build->subclass(
 
 my $build = $class->new(
       module_name        => "Locale::VersionedMessages",
-      dist_version       => "0.93",
+      dist_version       => "0.94",
       dist_abstract      => "handle all aspects of the localization process",
       license            => "perl",
       dist_author        => "Sullivan Beck <sbeck\@cpan.org>",

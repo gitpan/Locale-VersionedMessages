@@ -15,6 +15,9 @@ use warnings;
 use IO::File;
 use File::Path qw(make_path);
 
+our $VERSION;
+$VERSION='0.94';
+
 ###############################################################################
 
 # Create the message set module.
@@ -94,6 +97,9 @@ sub _set_write {
 
    my $pod  = "pod";   # So I can avoid indexing this as a pod
    my $head = "head1";
+   my $over = "over 4";
+   my $back = "back";
+   my $cut  = "cut";
 
    print $out
 "package Locale::VersionedMessages::Sets::${set};
@@ -175,7 +181,7 @@ This message set has been translated into the following locales:
 
 The following message IDs are available in this message set:
 
-=over 4
+=$over
 
 ";
 
@@ -196,9 +202,9 @@ The following message IDs are available in this message set:
    }
 
    print $out "
-=back
+=$back
 
-=cut
+=$cut
 ";
 
    $out->close();

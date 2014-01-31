@@ -26,3 +26,7 @@ Any suggestions, bug reports, or donations :-) should be sent to me.
   - Added copyright to the generated lexicons.
   - Cleaned up pod in generated files.
 
+0.94  2014-01-31
+  - Minor release to fix CPAN POD indexing issue (doe not affect the
+    module at all).
+
