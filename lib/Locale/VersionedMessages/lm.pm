@@ -16,7 +16,7 @@ use IO::File;
 use File::Path qw(make_path);
 
 our $VERSION;
-$VERSION='0.94';
+$VERSION='0.95';
 
 ###############################################################################
 

@@ -7,16 +7,3 @@ Before every release, spellcheck the documents:
       rm -f $i.txt $i.txt.bak
    done
 
-#########################################################################
-Set the release version
-
-   v=`cat internal/VERSION`
-   for i in \
-       bin/lm_gui \
-       `find lib -name \*.pm` \
-   ;do
-      sed -e "s,VERSION='.*',VERSION='$v'," $i > z
-      mv z $i
-   done
-   chmod +x bin/lm_gui
-

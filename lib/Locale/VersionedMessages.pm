@@ -10,7 +10,7 @@ use strict;
 use warnings;
 
 our $VERSION;
-$VERSION='0.94';
+$VERSION='0.95';
 
 ########################################################################
 # METHODS

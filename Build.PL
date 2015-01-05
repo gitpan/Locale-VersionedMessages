@@ -38,7 +38,7 @@ my $class = Module::Build->subclass(
 
 my $build = $class->new(
       module_name        => "Locale::VersionedMessages",
-      dist_version       => "0.94",
+      dist_version       => "0.95",
       dist_abstract      => "handle all aspects of the localization process",
       license            => "perl",
       dist_author        => "Sullivan Beck <sbeck\@cpan.org>",
@@ -53,6 +53,14 @@ my $build = $class->new(
       build_requires     => \%build_prereq,
       recommends         => \%script_prereq,
       sign               => 1,
+
+      ($Module::Build::VERSION >= 0.28
+       ? (meta_merge => {
+             resources => {
+                repository => "https://github.com/SBECK-github/Locale-VersionedMessages",
+             }
+          })
+       : ()),
       script_files       => [
                              'bin/lm_gui',
                             ],

@@ -1,3 +1,4 @@
+.travis.yml
 bin/lm_gui
 Build.PL
 Changes

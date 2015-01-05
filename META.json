@@ -4,7 +4,7 @@
       "Sullivan Beck <sbeck@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4204",
+   "generated_by" : "Module::Build version 0.4205",
    "license" : [
       "perl_5"
    ],
@@ -42,7 +42,7 @@
    "provides" : {
       "Locale::VersionedMessages" : {
          "file" : "lib/Locale/VersionedMessages.pm",
-         "version" : "0.94"
+         "version" : "0.95"
       },
       "Locale::VersionedMessages::Sets::lm_gui" : {
          "file" : "lib/Locale/VersionedMessages/Sets/lm_gui.pm"
@@ -52,7 +52,10 @@
    "resources" : {
       "license" : [
          "http://dev.perl.org/licenses/"
-      ]
+      ],
+      "repository" : {
+         "url" : "https://github.com/SBECK-github/Locale-VersionedMessages"
+      }
    },
-   "version" : "0.94"
+   "version" : "0.95"
 }

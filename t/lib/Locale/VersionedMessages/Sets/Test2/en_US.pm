@@ -41,7 +41,7 @@ our(%Messages);
    },
    'Subst_0f' => {
       'vers'  => 2,
-      'text'  => 'Error message (format) [aaa:%a]
+      'text'  => 'Error message (format) [aaa:%z]
 ',
    },
    'Subst_0g' => {

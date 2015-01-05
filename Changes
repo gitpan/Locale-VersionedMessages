@@ -30,3 +30,8 @@ Any suggestions, bug reports, or donations :-) should be sent to me.
   - Minor release to fix CPAN POD indexing issue (doe not affect the
     module at all).
 
+0.95  2015-01-05
+  - Put repository on GitHub. Gabor Szabo
+  - Fixed a test which failed with perl 5.21.* .  Slaven Rezic
+
+0.96
